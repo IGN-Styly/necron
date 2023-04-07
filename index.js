@@ -7,17 +7,12 @@ const {
   GatewayIntentBits,
   APIApplicationCommandPermissionsConstant,
 } = require("discord.js");
-const { token } = require("./config.json");
+require("dotenv").config()
 const mojang = require('mojang')
-const { hypixel_API } = require("./config.json");
-const { MongoClient, ServerApiVersion } = require("mongodb");
-const { uri } = require("./config.json");
-const { url } = require("node:inspector");
-const { get, request } = require("node:http");
-const { getEnvironmentData } = require("node:worker_threads");
-const dbClient = new MongoClient(uri);
+const hypixel_API = process.env.hypixel_API
+const token = process.env.token
 const { hypixelApi } = require("./api.js");
-const { PrismaClient } = require('@prisma/client')
+const { PrismaClient } = require('@prisma/client');
 const hypixel = "https://api.hypixel.net/player";
 
 

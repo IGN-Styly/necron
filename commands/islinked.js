@@ -25,9 +25,10 @@ module.exports = {
     // interaction.guild is the object representing the Guild in which the command was run
     if (await IsLink(interaction.options.getUser("ign").tag) === undefined) {
       await interaction.reply(`User [${interaction.options.getUser("ign")}] Does not have an Account Linked`);
+      return
     }
     const usr= await IsLink(interaction.options.getUser("ign").tag)
-    console.log(await usr)
+
     await interaction.reply(`User [${interaction.options.getUser("ign")}] owns the account with the IGN [${usr.user}]`);
   },
 };
