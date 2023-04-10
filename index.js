@@ -6,9 +6,9 @@ const {
   Events,
   GatewayIntentBits,
   APIApplicationCommandPermissionsConstant,
+  EmbedBuilder,
 } = require("discord.js");
 require("dotenv").config()
-const mojang = require('mojang')
 const hypixel_API = process.env.hypixel_API
 const token = process.env.token
 const { hypixelApi } = require("./api.js");
@@ -79,21 +79,57 @@ client.on("interactionCreate", async (interaction) => {
   }
   if (interaction.isModalSubmit()) {
     if (interaction.customId == "verify") {
+      const ok = new EmbedBuilder({
+        "title": "You Are Now Verified",
+        "color": 10937249,
+        "timestamp": "",
+        "author": {
+          "name": "Necron"
+        },
+        "image": {},
+        "thumbnail": {},
+        "footer": {},
+        "fields": []
+      })
+      const notok = new EmbedBuilder({
+        "title": `Verification Failed! \n Try Again`,
+        "color": 15961000,
+        "timestamp": "",
+        "author": {
+          "name": "Necron"
+        },
+        "image": {},
+        "thumbnail": {},
+        "footer": {},
+        "fields": []
+      })
+      const already = new EmbedBuilder({
+        "title": `You are already Verified`,
+        "color": 15961000,
+        "timestamp": "",
+        "author": {
+          "name": "Necron"
+        },
+        "image": {},
+        "thumbnail": {},
+        "footer": {},
+        "fields": []
+      })
       const input = interaction.fields.getTextInputValue('ign')
       const res= await fetch(`https://api.mojang.com/users/profiles/minecraft/${input}`)
       const data=await res.json()
+
       console.log(`[GET]: Requested Player uuid from Mojang, uuid:[${data.id}] with the username:[${data.name}]`)
 
       var request=hypixelApi(hypixel, hypixel_API, data.id);
-      
-      if(IsLink(interaction.user.tag)){interaction.reply({
-        content: `You are already verified`,
+      if((await IsLink(interaction.user.tag)).length>0){interaction.reply({
+        embeds:[already],
         ephemeral: true,
       });
     return}
-
+    
       if (interaction.user.tag===await request){interaction.reply({
-        content:"You Are Now Verified",
+        embeds:[ok],
         ephemeral: true, 
       }
       )
@@ -102,7 +138,7 @@ client.on("interactionCreate", async (interaction) => {
       return
     }
       interaction.reply({
-        content: `Verification Failed! \n Try Again`,
+        embeds:[notok],
         ephemeral: true,
       });
     }

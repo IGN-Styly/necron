@@ -1,20 +1,21 @@
 datasource db {
-
   provider = "cockroachdb"
 
-  url      = env("DATABASE_URL")
-
+  url = env("DATABASE_URL")
 }
-
 
 generator client {
-
   provider = "prisma-client-js"
-
 }
 
-model User{
-   id       BigInt                  @id @default(autoincrement())
-   user     String
-   tag String
+model User {
+  id   BigInt @id @default(autoincrement())
+  user String
+  tag  String
+}
+
+model Bank {
+  id  BigInt @id @default(autoincrement())
+  tag String
+  bal Int    @default(0)
 }

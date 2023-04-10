@@ -2,9 +2,11 @@
   "name": "necron",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
-    "dev": "node deploy && node ."
+    "build": "tsc",
+    "start": "node .",
+    "dev": "nodemon src/deploy.js && src/index.js"
   },
   "keywords": [],
   "author": "",
@@ -13,11 +15,10 @@
     "@prisma/client": "^4.12.0",
     "discord.js": "^14.8.0",
     "dotenv": "^16.0.3",
-    "mojang": "^0.3.0",
-    "mojang-api": "^0.0.2",
-    "mongodb": "^5.1.0"
+    "nodemon": "^2.0.22"
   },
   "devDependencies": {
+    "eslint": "^8.38.0",
     "prisma": "^4.12.0"
   }
 }
