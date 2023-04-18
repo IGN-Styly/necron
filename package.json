@@ -2,11 +2,10 @@
   "name": "necron",
   "version": "1.0.0",
   "description": "",
-  "main": "src/index.js",
+  "main": "index.js",
   "scripts": {
-    "build": "tsc",
     "start": "node .",
-    "dev": "nodemon src/deploy.js && src/index.js"
+    "dev": "nodemon deploy.js && nodemon src/index.js"
   },
   "keywords": [],
   "author": "",
